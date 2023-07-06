@@ -1,0 +1,15 @@
+:host {
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.checkout-container {
+  background-color: var(--main-bg);
+}
+
+.items-container {
+  padding-left: 1.5rem;
+}

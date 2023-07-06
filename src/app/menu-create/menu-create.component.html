@@ -1,0 +1,124 @@
+<div class="flex gap-8 justify-center">
+  <label class="flex items-center whitespace-nowrap gap-8">
+    <span> 店名： </span>
+    <input
+      #storeNameInput
+      type="text"
+      class="current-input w-full"
+      [value]="storeName"
+      (input)="storeName = storeNameInput.value"
+    />
+  </label>
+  <label class="flex items-center whitespace-nowrap gap-8">
+    <span> 地址： </span>
+    <input
+      #storeAddressInput
+      type="text"
+      class="current-input w-full"
+      [value]="storeAddress"
+      (input)="storeAddress = storeAddressInput.value"
+    />
+  </label>
+  <label class="flex items-center whitespace-nowrap gap-8">
+    <span> 電話： </span>
+    <input
+      #storeContactNumberInput
+      type="text"
+      class="current-input w-full"
+      [value]="storeContactNumber"
+      (input)="storeContactNumber = storeNameInput.value"
+    />
+  </label>
+</div>
+<div class="flex gap-8 justify-center">
+  <button class="stroked-button" (click)="addClassify()">新增分類</button>
+  <button class="stroked-button" (click)="save()">存擋</button>
+  <button class="stroked-button" (click)="saveFile()">匯出</button>
+  <button class="stroked-button" (click)="clear()">清除</button>
+  <!-- <button class="stroked-button" (click)="save()">載入</button> -->
+</div>
+<div
+  class="classifies-container scrollbar-color grid grid-flow-col p-8 gap-16 auto-cols-400px overflow-auto w-full"
+>
+  <div
+    *ngFor="let classify of classifies; let index = index"
+    class="classify-container grid grid-rows-auto-auto-1fr gap-4 overflow-hidden"
+  >
+    <div class="flex">
+      <label class="flex items-center whitespace-nowrap gap-8 mr-auto">
+        <span> 分類： </span>
+        <input
+          #classifyLabelInput
+          type="text"
+          class="current-input w-full"
+          [value]="classify.label"
+          (input)="classify.label = classifyLabelInput.value"
+        />
+      </label>
+
+      <button class="stroked-button" (click)="addItem(classify, index)">
+        新增品項
+      </button>
+    </div>
+
+    <div class="grid grid-cols-auto-1fr gap-8">
+      <span>
+        <div>標籤：</div>
+        <button
+          class="icon-button rounded-full-button"
+          (click)="addTag(classify, index)"
+        >
+          +
+        </button>
+      </span>
+      <div class="flex flex-wrap gap-4">
+        <span *ngFor="let tag of classify.tags; let tagIndex = index">
+          <input
+            #tagLabelInput
+            type="text"
+            class="current-input"
+            placeholder="請輸入標籤"
+            [value]="tag.label"
+            (input)="
+              updateTag(classify, index, tag, tagIndex, tagLabelInput.value)
+            "
+          />
+          <button
+            class="icon-button icon-button-size-20 rounded-full-button"
+            (click)="removeTag(classify, index, tag, tagIndex)"
+          >
+            x
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div class="scrollbar-color grid overflow-auto gap-4 content-start">
+      <div *ngFor="let item of classify.items">
+        <label class="flex items-center whitespace-nowrap gap-8">
+          <span> 品項名： </span>
+          <input
+            #itemLabelInput
+            type="text"
+            class="current-input w-full"
+            [value]="item.label"
+            (input)="item.label = itemLabelInput.value"
+          />
+        </label>
+        <div
+          *ngFor="let tag of item.tags"
+          class="flex items-center pt-4 pl-16 gap-4"
+        >
+          <span> {{ classify.tagLabelMap | mapValue : tag.id }}: </span>
+          <input
+            #tagValueInput
+            type="text"
+            class="current-input w-full"
+            [value]="tag.value"
+            (input)="tag.value = tagValueInput.value"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

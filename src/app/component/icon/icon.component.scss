@@ -1,0 +1,10 @@
+:host {
+  user-select: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: var(--icon-size, 24px);
+  width: var(--icon-size, 24px);
+  overflow: hidden;
+  line-height: 1;
+}

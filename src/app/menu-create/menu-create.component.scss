@@ -1,0 +1,18 @@
+:host {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  height: 100%;
+  gap: 8px;
+  padding: 16px;
+}
+
+.classify-container {
+  background-color: var(--bg-primary-9);
+}
+
+.current-input {
+  background-color: var(--bg-primary);
+  color: var(--fg-primary);
+  border: 1px solid var(--fg-primary-8);
+  outline: transparent;
+}

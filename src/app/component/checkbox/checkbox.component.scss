@@ -1,0 +1,90 @@
+:host {
+  width: var(--checkbox-size, 1rem);
+  height: var(--checkbox-size, 1rem);
+}
+
+.checkbox__control {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  &:disabled {
+    pointer-events: none;
+  }
+}
+
+.checkbox__ripple {
+  background-color: var(--checkbox-ripple-color, var(--fg-primary));
+  transform: scale(var(--checkbox-ripple-scale, 2.5));
+  border-radius: 50%;
+
+  .checkbox__control:checked + & {
+    --checkbox-ripple-color: var(--checkbox-checked-color, var(--fg-primary));
+  }
+
+  :host:hover > & {
+    opacity: 0.08;
+  }
+
+  .checkbox__control:focus + & {
+    opacity: 0.16;
+  }
+
+  .checkbox__control:active + & {
+    opacity: 0.2;
+  }
+
+  .checkbox__control:disabled + & {
+    opacity: 0;
+  }
+}
+
+.checkbox__background {
+  border-style: solid;
+  border-width: var(--checkbox-border-width, 1px);
+  border-radius: 2px;
+  border-color: var(--checkbox-border-color, var(--fg-primary-060));
+  background-color: var(--checkbox-background-color, transparent);
+
+  .checkbox__control:checked ~ & {
+    --checkbox-background-color: var(
+      --checkbox-checked-color,
+      var(--fg-primary)
+    );
+    --checkbox-border-color: var(--checkbox-checked-color, var(--fg-primary));
+  }
+
+  :host:hover > & {
+    border-color: var(--checkbox-border-color, var(--fg-primary));
+  }
+
+  .checkbox__control:focus ~ & {
+    border-color: var(--checkbox-border-color, var(--fg-primary));
+  }
+
+  .checkbox__control:disabled ~ & {
+    --checkbox-border-color: var(--fg-primary-040);
+  }
+
+  .checkbox__control:checked:disabled ~ & {
+    --checkbox-background-color: var(--fg-primary-040);
+    --checkbox-border-color: transparent;
+  }
+}
+
+.checkbox__checkmark {
+  color: var(--checkbox-checkmark-color, var(--bg-primary));
+
+  .checkbox__control:checked ~ .checkbox__background & {
+    opacity: 1;
+  }
+}
+
+.checkbox__checkmark-path {
+  transition: stroke-dashoffset 180ms 0ms cubic-bezier(0.4, 0, 0.6, 1);
+  stroke: currentColor;
+  stroke-width: 3.12px;
+  stroke-dashoffset: 29.7833385;
+  stroke-dasharray: 29.7833385;
+
+  .checkbox__control:checked ~ .checkbox__background & {
+    stroke-dashoffset: 0;
+  }
+}

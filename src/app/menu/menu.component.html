@@ -1,0 +1,67 @@
+<div class="main-product p-8 max-w-400px flex items-center justify-between">
+  <span>招</span>
+  <span>牌</span>
+  <span>鵝</span>
+  <span>肉</span>
+  <app-checkbox
+    class="checkbox-size-big"
+    [checked]="mainProductCheck"
+    (checkedChange)="updateMainProduct($event)"
+  ></app-checkbox>
+</div>
+<div *ngFor="let classify of classifies">
+  <div *ngIf="classify.label" class="classify-header sticky top-0 p-8 z-10">
+    <div class="grid grid-cols-2fr-1fr-1fr gap-16 max-w-600px">
+      <h2 class="flex justify-between pr-16">
+        <span *ngFor="let char of classify.labelCharacters">{{ char }}</span>
+      </h2>
+      <span class="text-center">{{ classify.tags[0].label }}</span>
+      <span class="text-center">{{ classify.tags[1].label }}</span>
+    </div>
+  </div>
+  <div *ngFor="let item of classify.items" class="p-8">
+    <div class="grid grid-cols-2fr-1fr-1fr gap-16 max-w-600px">
+      <h3 class="flex justify-between pr-16">
+        <span *ngFor="let char of item.labelCharacters">{{ char }}</span>
+      </h3>
+      <span class="text-center">
+        <label
+          *ngIf="item.tags[0]?.value as label"
+          class="cursor-pointer select-none inline-flex items-center gap-8"
+        >
+          {{ label }}
+          <app-checkbox
+            [checked]="item.checks[0]"
+            (checkedChange)="
+              checkItem(
+                item.label,
+                classify.tags[0].label,
+                item.tags[0].value,
+                $event
+              )
+            "
+          ></app-checkbox>
+        </label>
+      </span>
+      <span class="text-center">
+        <label
+          *ngIf="item.tags[1]?.value as label"
+          class="cursor-pointer select-none inline-flex items-center gap-8"
+        >
+          {{ label }}
+          <app-checkbox
+            [checked]="item.checks[1]"
+            (checkedChange)="
+              checkItem(
+                item.label,
+                classify.tags[1].label,
+                item.tags[1].value,
+                $event
+              )
+            "
+          ></app-checkbox>
+        </label>
+      </span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "foodgood-c130c": {
+      "hosting": {
+        "foodgood": [
+          "foodgood-c130c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "foodgood-c130c"
+  }
+}

@@ -1,0 +1,296 @@
+/* Utility classes */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap; /* added line */
+  border: 0;
+  outline: 0;
+  appearance: none;
+  left: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.inline-flex {
+  display: inline-flex;
+}
+
+.inline-grid {
+  display: inline-grid;
+}
+
+.hidden {
+  display: none;
+}
+
+.place-items-center {
+  place-items: center;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.content-start {
+  align-content: start;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.grow-0 {
+  flex-grow: 0;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.shrink-0 {
+  flex-shrink: 0;
+}
+
+.grid-cols-40px-1fr-40px {
+  grid-template-columns: 40px 1fr 40px;
+}
+
+.grid-cols-auto-1fr {
+  grid-template-columns: auto 1fr;
+}
+
+.grid-cols-2fr-1fr-1fr {
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.grid-rows-auto-1fr {
+  grid-template-rows: auto 1fr;
+}
+
+.grid-rows-auto-auto-1fr {
+  grid-template-rows: auto auto 1fr;
+}
+
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+
+.auto-cols-400px {
+  grid-auto-columns: 400px;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.p-d {
+  padding: 4px;
+}
+
+.p-8 {
+  padding: 8px;
+}
+
+.p-16 {
+  padding: 16px;
+}
+
+.pt-4 {
+  padding-top: 4px;
+}
+
+.pl-16 {
+  padding-left: 16px;
+}
+
+.pr-16 {
+  padding-right: 16px;
+}
+
+.mis-8 {
+  margin-inline-start: 8px;
+}
+
+.gap-4 {
+  gap: 4px;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-16 {
+  gap: 8px;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.inset-0 {
+  inset: 0;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.left-0 {
+  left: 0;
+}
+
+.left-full {
+  left: 100%;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-auto {
+  pointer-events: auto;
+}
+
+.contain-strict {
+  contain: strict;
+}
+
+.contain-content {
+  contain: content;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.min-w-300px {
+  min-width: 300px;
+}
+
+.max-w-400px {
+  max-width: 400px;
+}
+
+.max-w-600px {
+  max-width: 600px;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+.transition-opacity {
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-transform {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transition-opacity {
+    transition-duration: 0.01ms;
+  }
+
+  .transition-transform {
+    transition-duration: 0.01ms;
+  }
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.select-none {
+  user-select: none;
+}
+
+.scrollbar-color::-webkit-scrollbar {
+  background-color: var(--bg-primary-9);
+}
+
+.scrollbar-color::-webkit-scrollbar-thumb {
+  background-color: var(--bg-primary-7);
+}
+
+.checkbox-size-big {
+  --checkbox-size: 1.5rem;
+}

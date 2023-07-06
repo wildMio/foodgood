@@ -1,13 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Foodgood</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Foodgood</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="鵝香鵝肉店的菜單" />
+    <meta name="keywords" content="鵝香鵝肉店菜單, 新屋鵝香鵝肉店" />
+    <meta name="author" content="wildMio" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://foodgood-c130c.web.app" />
+    <meta property="og:title" content="鵝香鵝肉店 - 菜單" />
+    <meta
+      property="og:description"
+      content="鵝香鵝肉店的菜單: 招牌鵝肉, 客家湯圓..."
+    />
+    <meta
+      property="og:image"
+      content="https://foodgood-c130c.web.app/assets/img/app-preview-squoosh.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="430" />
+    <meta property="og:image:height" content="430" />
+    <link rel="icon" type="image/svg+xml" href="/assets/icon/logo.svg" />
+  </head>
+  <body>
+    <app-root>
+      <div class="loading-container w-full h-full grid place-items-center">
+        <div class="loading overflow-hidden grid gap-8">
+          <div class="loading-bar"></div>
+          <div class="loading-bar"></div>
+          <div class="loading-bar"></div>
+        </div>
+      </div>
+    </app-root>
+    <div class="overlay-container fixed inset-0"></div>
+  </body>
 </html>

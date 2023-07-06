@@ -1,1 +1,59 @@
-/* You can add global styles to this file, and also import other style files */
+// @import "./assets/styles/font";
+
+@import "./assets/styles/var";
+
+@import "./assets/styles/reset";
+
+/* general styling */
+
+body {
+  font-size: var(--fs-600);
+  font-family: var(--ff-primary);
+  color: var(--fg-primary);
+  background-color: var(--main-bg);
+}
+
+@import "./assets/styles/util";
+
+@import "./assets/styles/button";
+
+.overlay-container {
+  z-index: 1000;
+  background-color: var(--bg-primary-060);
+  display: flex;
+  &:empty {
+    display: none;
+  }
+}
+
+.loading {
+  width: 36px;
+  height: 36px;
+}
+.loading-bar {
+  background-color: var(--fg-primary);
+  height: 4px;
+  transform: translateX(-100%) scale(0.9);
+  opacity: 0;
+  animation: loading-bar 1s ease-in-out infinite forwards;
+}
+.loading-bar:nth-child(2) {
+  animation-delay: -0.33s;
+}
+.loading-bar:nth-child(3) {
+  animation-delay: -0.66s;
+}
+@keyframes loading-bar {
+  0% {
+    transform: translateX(-100%) scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) scale(0.9);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,26 @@
+<input
+  #checkbox
+  type="checkbox"
+  class="checkbox__control m-0 cursor-pointer opacity-0 w-full h-full"
+  [checked]="checked"
+  [ariaChecked]="checked"
+  [disabled]="disabled"
+  [tabindex]="tabindex"
+  (input)="changeValue(checkbox.checked)"
+/>
+<div
+  class="checkbox__ripple absolute inset-0 opacity-0 pointer-events-none"
+></div>
+<div class="checkbox__background absolute inset-0 flex pointer-events-none">
+  <svg
+    aria-hidden="true"
+    class="checkbox__checkmark opacity-0 w-full h-full"
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill="none"
+      d="m1.73 12.91 6.37 6.37L22.79 4.59"
+      class="checkbox__checkmark-path"
+    />
+  </svg>
+</div>

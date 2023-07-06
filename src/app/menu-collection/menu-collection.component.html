@@ -1,0 +1,33 @@
+<div class="flex items-center p-8 gap-4">
+  檢視模式：
+  <button
+    class="icon-button"
+    [class.selected]="mode === 'row'"
+    (click)="mode = 'row'"
+  >
+    <app-icon svgIcon="table-rows"></app-icon>
+  </button>
+  <button
+    class="icon-button"
+    [class.selected]="mode === 'col'"
+    (click)="mode = 'col'"
+  >
+    <app-icon svgIcon="view-column"></app-icon>
+  </button>
+</div>
+<div class="grid" [class.grid-flow-col]="mode === 'col'">
+  <div *ngFor="let classify of classifies" class="classify-container">
+    <div class="classify-header sticky top-0 p-8 z-10">
+      <h2 class="flex justify-between pr-16">
+        {{ classify.label }}
+      </h2>
+    </div>
+    <ol class="ol">
+      <li *ngFor="let item of classify.items" class="p-8">
+        <h3 class="flex">
+          {{ item }}
+        </h3>
+      </li>
+    </ol>
+  </div>
+</div>
