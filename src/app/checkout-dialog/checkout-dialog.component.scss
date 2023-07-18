@@ -11,5 +11,19 @@
 }
 
 .items-container {
-  padding-left: 1.5rem;
+  padding-left: 1.75rem;
+}
+
+.up-arrow {
+  border: 4px solid transparent;
+  border-bottom-color: inherit;
+}
+
+.down-arrow {
+  border: 4px solid transparent;
+  border-top-color: inherit;
+}
+
+.sort-container {
+  height: 36px;
 }

@@ -41,12 +41,12 @@
       <app-icon svgIcon="menu-open"></app-icon>
       <span class="visually-hidden">Close sidenav</span>
     </button>
-    <nav class="h-full">
+    <nav class="h-full relative">
       <div class="flex gap-8 mb-8">
         <button class="icon-button" (click)="toggleTheme()">
           <app-icon svgIcon="brightness-medium"></app-icon>
         </button>
-        <div>
+        <div class="ml-auto">
           <button
             class="basic-button"
             [class.selected]="fontSize === 16"
@@ -77,6 +77,7 @@
             class="nav-link basic-button w-full gap-8"
             routerLink="menu"
             routerLinkActive="selected"
+            (click)="closeNav(navEl, sidenavOpenButton)"
             ><app-icon svgIcon="fact-check"></app-icon>菜單</a
           >
         </li>
@@ -85,11 +86,19 @@
             class="nav-link basic-button w-full gap-8"
             routerLink="menu-collection"
             routerLinkActive="selected"
+            (click)="closeNav(navEl, sidenavOpenButton)"
             ><app-icon svgIcon="playlist-add-check-circle"></app-icon
             >精選組合</a
           >
         </li>
       </ul>
+      <div class="information sticky flex items-center gap-4">
+        <app-icon svgIcon="info"></app-icon>
+        <span class="info">
+          <div>此程式僅提供預覽菜單功能</div>
+          <div>，無與店家訂餐系統連動。</div>
+        </span>
+      </div>
     </nav>
   </div>
 </section>

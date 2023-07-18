@@ -115,6 +115,10 @@
   margin-right: auto;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .p-d {
   padding: 4px;
 }
@@ -139,8 +143,17 @@
   padding-right: 16px;
 }
 
+.px-16 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .mis-8 {
   margin-inline-start: 8px;
+}
+
+.gap-2 {
+  gap: 2px;
 }
 
 .gap-4 {

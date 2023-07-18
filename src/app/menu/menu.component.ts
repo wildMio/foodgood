@@ -41,6 +41,7 @@ export class MenuComponent {
     } else {
       this.selectedItems.delete(key);
     }
+    this.shoppingCartService.saveSelectedItems();
   }
 
   updateMainProduct(check: boolean) {

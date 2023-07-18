@@ -59,3 +59,12 @@
     transform: translate(170%) scaleX(0.3);
   }
 }
+
+.information {
+  top: 100%;
+  color: var(--fg-primary-5);
+}
+
+.info {
+  font-size: var(--fs-300);
+}
