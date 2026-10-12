@@ -1,109 +1,86 @@
-<header class="header grid grid-cols-40px-1fr-40px p-8 items-center">
+<header class="app-header">
+  <a class="brand" routerLink="/" (click)="onNavClick('/')">
+    <app-icon svgIcon="goose"></app-icon>
+    <span class="brand-name">{{ storeName }}</span>
+  </a>
+
+  <nav class="top-nav" aria-label="主要導覽">
+    <ng-container *ngTemplateOutlet="navLinks"></ng-container>
+  </nav>
+
   <button
-    #sidenavOpenButton
+    type="button"
     class="icon-button"
-    [ariaExpanded]="navExpanded"
-    aria-controls="side-navigation"
-    (click)="openNav(navEl, menuCloseButton)"
+    popovertarget="display-settings"
+    aria-label="顯示設定"
   >
-    <app-icon svgIcon="menu"></app-icon>
-    <span class="visually-hidden">Open sidenav</span>
-  </button>
-  <h1 class="text-center">鵝香鵝肉店</h1>
-  <button class="icon-button" (click)="openCheckout()">
-    <app-icon svgIcon="shopping-cart"></app-icon>
+    <app-icon svgIcon="format-size"></app-icon>
   </button>
 </header>
 
-<main class="scrollbar-color overflow-auto relative">
+<main #mainEl class="scrollbar-color overflow-auto relative">
   <router-outlet></router-outlet>
 </main>
 
-<section
-  #navEl
-  class="side-navigation fixed inset-0 hidden content-strict z-10"
-  id="side-navigation"
->
-  <div
-    class="nav-backdrop w-full h-full transition-opacity"
-    (click)="closeNav(navEl, sidenavOpenButton)"
-  ></div>
-  <div
-    class="nav-container absolute top-0 left-0 h-full p-8 transition-transform"
-  >
-    <button
-      #menuCloseButton
-      class="icon-button absolute left-full mis-8"
-      [ariaExpanded]="navExpanded"
-      aria-controls="primary-navigation"
-      (click)="closeNav(navEl, sidenavOpenButton)"
+<nav class="bottom-nav" aria-label="主要導覽">
+  <ng-container *ngTemplateOutlet="navLinks"></ng-container>
+</nav>
+
+<ng-template #navLinks>
+  @for (item of navItems; track item.label) {
+    <a
+      class="nav-link"
+      [routerLink]="item.link"
+      [fragment]="item.fragment"
+      routerLinkActive="is-active"
+      ariaCurrentWhenActive="page"
+      [routerLinkActiveOptions]="item.match"
+      (click)="onNavClick(item.link, item.fragment)"
     >
-      <app-icon svgIcon="menu-open"></app-icon>
-      <span class="visually-hidden">Close sidenav</span>
-    </button>
-    <nav class="h-full relative">
-      <div class="flex gap-8 mb-8">
-        <button class="icon-button" (click)="toggleTheme()">
-          <app-icon svgIcon="brightness-medium"></app-icon>
+      <app-icon [svgIcon]="item.icon"></app-icon>
+      <span>{{ item.label }}</span>
+      @if (item.link === "/menu" && cart.count()) {
+        <span class="nav-badge" aria-label="已選品項數">{{
+          cart.count()
+        }}</span>
+      }
+    </a>
+  }
+</ng-template>
+
+<div id="display-settings" popover class="settings">
+  <fieldset class="settings-group">
+    <legend>外觀</legend>
+    <div class="segmented">
+      @for (option of themes; track option.value) {
+        <button
+          type="button"
+          [class.is-active]="theme() === option.value"
+          [attr.aria-pressed]="theme() === option.value"
+          (click)="theme.set(option.value)"
+        >
+          {{ option.label }}
         </button>
-        <div class="ml-auto">
-          <button
-            class="basic-button"
-            [class.selected]="fontSize === 16"
-            (click)="changeFontSize(16)"
-          >
-            小
-          </button>
-          <button
-            class="basic-button"
-            [class.selected]="fontSize === 20"
-            (click)="changeFontSize(20)"
-          >
-            中
-          </button>
-          <button
-            class="basic-button"
-            [class.selected]="fontSize === 24"
-            (click)="changeFontSize(24)"
-          >
-            大
-          </button>
-        </div>
-      </div>
+      }
+    </div>
+  </fieldset>
+  <fieldset class="settings-group">
+    <legend>字級</legend>
+    <div class="segmented">
+      @for (option of fontSizes; track option.value) {
+        <button
+          type="button"
+          [class.is-active]="fontSize() === option.value"
+          [attr.aria-pressed]="fontSize() === option.value"
+          (click)="fontSize.set(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+  </fieldset>
+</div>
 
-      <ul aria-label="Primary" role="list" class="nav-list grid gap-4">
-        <li>
-          <a
-            class="nav-link basic-button w-full gap-8"
-            routerLink="menu"
-            routerLinkActive="selected"
-            (click)="closeNav(navEl, sidenavOpenButton)"
-            ><app-icon svgIcon="fact-check"></app-icon>菜單</a
-          >
-        </li>
-        <li>
-          <a
-            class="nav-link basic-button w-full gap-8"
-            routerLink="menu-collection"
-            routerLinkActive="selected"
-            (click)="closeNav(navEl, sidenavOpenButton)"
-            ><app-icon svgIcon="playlist-add-check-circle"></app-icon
-            >精選組合</a
-          >
-        </li>
-      </ul>
-      <div class="information sticky flex items-center gap-4">
-        <app-icon svgIcon="info"></app-icon>
-        <span class="info">
-          <div>此程式僅提供預覽菜單功能</div>
-          <div>，無與店家訂餐系統連動。</div>
-        </span>
-      </div>
-    </nav>
-  </div>
-</section>
-
-<div
-  *ngIf="loadModuleIndicator$ | async"
-  class="loading-indicator fixed top-0 w-full"
-></div>
+@if (loadModuleIndicator$ | async) {
+  <div class="loading-indicator fixed top-0 w-full"></div>
+}

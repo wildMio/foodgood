@@ -1,0 +1,137 @@
+:host {
+  display: block;
+}
+
+.hero {
+  padding: var(--size-700) var(--size-400);
+  background:
+    radial-gradient(ellipse at 50% 0%, var(--accent-soft), transparent 70%),
+    var(--main-bg);
+  border-bottom: 1px solid var(--bg-primary-7);
+
+  @media (min-width: 768px) {
+    padding-block: var(--size-900);
+  }
+}
+
+.hero-content {
+  gap: var(--size-300);
+}
+
+.hero-logo {
+  --icon-size: 56px;
+  color: var(--accent);
+}
+
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: clamp(1.75rem, 9vw, var(--fs-900));
+  text-wrap: balance;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+}
+
+.hero-slogan {
+  font-size: 1.125rem;
+  color: var(--fg-primary-6);
+  margin-bottom: var(--size-200);
+}
+
+/* 營業狀態於瀏覽器端才顯示，預留高度避免版面位移 */
+.status-slot {
+  min-height: 1.5rem;
+}
+
+.status {
+  color: var(--fg-primary-6);
+  font-size: var(--fs-400);
+  text-decoration: none;
+}
+
+.dish-list {
+  display: grid;
+  column-gap: var(--size-600);
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.dish {
+  display: grid;
+  gap: var(--size-100);
+  padding-block: var(--size-300);
+  border-bottom: 1px solid var(--bg-primary-7);
+}
+
+.dish-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--size-300);
+
+  h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+}
+
+.collections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: var(--size-300);
+}
+
+.price-lg {
+  font-size: var(--fs-700);
+  font-weight: 700;
+}
+
+.card-link {
+  transition: border-color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--accent);
+  }
+}
+
+.prose {
+  max-width: 40em;
+  line-height: 1.9;
+  color: var(--fg-primary-8);
+}
+
+.info-layout {
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1.2fr;
+  }
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--size-300);
+  align-items: start;
+  line-height: 1.6;
+
+  dt {
+    color: var(--accent);
+  }
+}
+
+.map {
+  width: 100%;
+  min-height: 320px;
+  height: 100%;
+  border: 0;
+  border-radius: 12px;
+  background-color: var(--bg-primary-8);
+}
+
+.footer {
+  padding: var(--size-600) var(--size-400);
+  border-top: 1px solid var(--bg-primary-7);
+  font-size: var(--fs-400);
+}

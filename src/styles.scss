@@ -1,8 +1,9 @@
-// @import "./assets/styles/font";
+@use "assets/styles/var";
 
-@import "./assets/styles/var";
-
-@import "./assets/styles/reset";
+@use "assets/styles/reset";
+@use "assets/styles/util";
+@use "assets/styles/button";
+@use "assets/styles/brand";
 
 /* general styling */
 
@@ -13,16 +14,26 @@ body {
   background-color: var(--main-bg);
 }
 
-@import "./assets/styles/util";
+html {
+  color-scheme: dark;
+}
 
-@import "./assets/styles/button";
+html:has(body.light-mode) {
+  color-scheme: light;
+}
 
-.overlay-container {
-  z-index: 1000;
-  background-color: var(--bg-primary-060);
-  display: flex;
-  &:empty {
-    display: none;
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 

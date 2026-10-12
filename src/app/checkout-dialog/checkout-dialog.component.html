@@ -1,84 +1,107 @@
-<div
-  class="checkout-container h-full grid grid-rows-auto-auto-1fr max-w-400px w-full"
+<dialog
+  #dialog
+  class="sheet"
+  aria-labelledby="cart-title"
+  (close)="onClose()"
+  (click)="closeOnBackdrop($event)"
 >
-  <header class="flex items-center p-8">
-    <div class="mr-auto">總結：{{ total }} {{ additionalLabel }}</div>
-    <button appAutoFocus class="icon-button" (click)="closeDialog()">X</button>
-  </header>
-  <div class="px-16 flex gap-8 items-center whitespace-nowrap overflow-hidden">
-    <span>排序：</span>
-    <div class="sort-container overflow-hidden">
-      <div class="flex gap-4 overflow-auto">
-        <button
-          class="basic-button flex gap-4"
-          [class.selected]="sortType === 'choice'"
-          (click)="changeSort('choice')"
-        >
-          勾選順序
-          <div class="grid gap-2">
-            <span
-              class="up-arrow"
-              [class.opacity-0]="sortType === 'choice' && sort === 'asc'"
-            ></span>
-            <span
-              class="down-arrow"
-              [class.opacity-0]="sortType === 'choice' && sort === 'desc'"
-            ></span>
-          </div>
-        </button>
-        <button
-          class="basic-button flex gap-4"
-          [class.selected]="sortType === 'name'"
-          (click)="changeSort('name')"
-        >
-          品項名
-          <div class="grid gap-2">
-            <span
-              class="up-arrow"
-              [class.opacity-0]="sortType === 'name' && sort === 'asc'"
-            ></span>
-            <span
-              class="down-arrow"
-              [class.opacity-0]="sortType === 'name' && sort === 'desc'"
-            ></span>
-          </div>
-        </button>
-        <button
-          class="basic-button flex gap-4"
-          [class.selected]="sortType === 'price'"
-          (click)="changeSort('price')"
-        >
-          價格
-          <div class="grid gap-2">
-            <span
-              class="up-arrow"
-              [class.opacity-0]="sortType === 'price' && sort === 'asc'"
-            ></span>
-            <span
-              class="down-arrow"
-              [class.opacity-0]="sortType === 'price' && sort === 'desc'"
-            ></span>
-          </div>
-        </button>
+  <div class="sheet-body">
+    <header class="sheet-header">
+      <h2 id="cart-title" class="sheet-title">
+        已選品項 <span class="muted">{{ cart.count() }}</span>
+      </h2>
+      <button
+        type="button"
+        class="icon-button"
+        aria-label="關閉"
+        (click)="dialog.close()"
+      >
+        <app-icon svgIcon="close"></app-icon>
+      </button>
+    </header>
+
+    @if (cart.count()) {
+      @if (cart.items().size > 1) {
+        <div class="sort chips" role="group" aria-label="排序方式">
+          @for (option of sortOptions; track option.type) {
+            <button
+              type="button"
+              class="chip"
+              [class.is-active]="sortType() === option.type"
+              [attr.aria-pressed]="sortType() === option.type"
+              (click)="changeSort(option.type)"
+            >
+              {{ option.label }}
+              @if (sortType() === option.type) {
+                <span aria-hidden="true">{{
+                  sort() === "asc" ? "↑" : "↓"
+                }}</span>
+              }
+            </button>
+          }
+        </div>
+      }
+
+      <ul role="list" class="sheet-list">
+        @if (cart.mainProduct(); as mainProduct) {
+          <li class="sheet-row">
+            <span>{{ mainProduct.label }}</span>
+            <span class="price">時價</span>
+            <button
+              type="button"
+              class="icon-button remove"
+              [attr.aria-label]="'移除 ' + mainProduct.label"
+              (click)="cart.mainProduct.set(null)"
+            >
+              <app-icon svgIcon="close"></app-icon>
+            </button>
+          </li>
+        }
+        @for (item of items(); track item.key) {
+          <li class="sheet-row">
+            <span>
+              {{ item.label }}
+              @if (item.tag) {
+                <small class="muted">{{ item.tag }}</small>
+              }
+            </span>
+            <span class="price">${{ item.value }}</span>
+            <button
+              type="button"
+              class="icon-button remove"
+              [attr.aria-label]="'移除 ' + item.label"
+              (click)="cart.remove(item.key)"
+            >
+              <app-icon svgIcon="close"></app-icon>
+            </button>
+          </li>
+        }
+      </ul>
+
+      <footer class="sheet-footer">
+        <div class="flex items-center justify-between">
+          <button type="button" class="link-button" (click)="cart.clear()">
+            清空
+          </button>
+          <p class="total">
+            合計
+            <strong class="price">${{ cart.total() }}</strong>
+            @if (cart.mainProduct()) {
+              <span class="muted">＋時價</span>
+            }
+          </p>
+        </div>
+        <p class="note muted">
+          此清單僅供點餐時對照，未連動店家點餐系統，請向店員點餐。
+        </p>
+      </footer>
+    } @else {
+      <div class="empty grid gap-16 place-items-center text-center">
+        <p class="muted">尚未選擇任何品項</p>
+        <a class="cta cta-primary" routerLink="/menu" (click)="dialog.close()">
+          瀏覽菜單
+        </a>
       </div>
-    </div>
+    }
   </div>
-  <ol
-    class="items-container p-16 overflow-auto scrollbar-color grid gap-8 content-start"
-  >
-    <li *ngIf="mainProduct">
-      <div class="flex justify-between items-center">
-        <span>{{ mainProduct.label }}</span>
-
-        <span>時價</span>
-      </div>
-    </li>
-    <li *ngFor="let item of selectedItemsMap[sortKey]">
-      <div class="flex justify-between items-center">
-        <span>{{ item.label }} ({{ item.tag }})</span>
-
-        <span>{{ item.value }}</span>
-      </div>
-    </li>
-  </ol>
-</div>
+</dialog>

@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReplaySubject, map } from 'rxjs';
-import { InputTo$ } from 'src/app/util/input-to-observable';
+import { InputTo$ } from '../../util/input-to-observable';
 
 @Component({
   selector: 'app-icon',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],

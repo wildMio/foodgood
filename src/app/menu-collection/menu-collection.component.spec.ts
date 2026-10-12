@@ -8,7 +8,7 @@ describe('MenuCollectionComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MenuCollectionComponent]
+      imports: [MenuCollectionComponent],
     });
     fixture = TestBed.createComponent(MenuCollectionComponent);
     component = fixture.componentInstance;

@@ -1,38 +1,35 @@
-import { DOCUMENT } from '@angular/common';
 import {
   ApplicationRef,
   ComponentRef,
-  inject,
+  DOCUMENT,
   Injectable,
+  Type,
+  createComponent,
+  inject,
 } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class OverlayService {
   private readonly document = inject(DOCUMENT);
-  overlayContainer = this.document.querySelector('.overlay-container')!;
-  appRef = inject(ApplicationRef);
-  componentRef?: ComponentRef<any> | null;
+  private readonly appRef = inject(ApplicationRef);
+  private componentRef?: ComponentRef<unknown> | null;
+  private previousActiveElement?: HTMLElement;
 
-  previousActiveElement?: HTMLElement;
-
-  create(element: HTMLElement) {
-    this.overlayContainer?.appendChild(element);
-  }
-
-  attach<T>(componentRef: ComponentRef<T>) {
+  open<T>(component: Type<T>) {
     if (this.componentRef) {
       return;
     }
 
     this.previousActiveElement = this.document.activeElement as HTMLElement;
 
-    this.componentRef = componentRef;
-    this.appRef.attachView(componentRef.hostView);
-
-    this.overlayContainer?.appendChild(componentRef.location.nativeElement);
+    this.componentRef = createComponent(component, {
+      environmentInjector: this.appRef.injector,
+    });
+    this.appRef.attachView(this.componentRef.hostView);
+    this.document.body.appendChild(this.componentRef.location.nativeElement);
   }
 
-  detach() {
+  close() {
     if (!this.componentRef) {
       return;
     }

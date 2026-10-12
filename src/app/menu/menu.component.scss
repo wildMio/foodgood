@@ -1,9 +1,123 @@
-.classify-header {
-  background-color: var(--fg-primary-9);
-  color: var(--bg-primary-9);
+:host {
+  display: block;
+  --chip-bar-height: 3.25rem;
 }
 
-.main-product {
-  font-size: 1.5rem;
-  width: 60%;
+.chip-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: var(--chip-bar-height);
+  margin-inline: calc(var(--size-400) * -1);
+  padding-inline: var(--size-400);
+  background-color: var(--main-bg);
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-400);
+  margin-block: var(--size-400);
+  padding: var(--size-400);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  background-color: var(--accent-soft);
+}
+
+.feature-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.category {
+  scroll-margin-top: var(--chip-bar-height);
+  margin-bottom: var(--size-500);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 3.75rem);
+  align-items: center;
+  gap: var(--size-200);
+}
+
+.category-header {
+  position: sticky;
+  top: var(--chip-bar-height);
+  z-index: 1;
+  padding: var(--size-200) 0;
+  border-bottom: 2px solid var(--accent);
+  background-color: var(--main-bg);
+
+  h2 {
+    font-family: var(--ff-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+  }
+}
+
+.size {
+  text-align: center;
+  color: var(--fg-primary-5);
+  font-size: var(--fs-400);
+}
+
+.menu-row {
+  min-height: 3.25rem;
+  border-bottom: 1px solid var(--bg-primary-8);
+}
+
+.menu-name {
+  line-height: 1.4;
+}
+
+.footnote {
+  padding-bottom: var(--size-500);
+  font-size: var(--fs-300);
+  text-align: center;
+}
+
+.summary-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding: var(--size-200) var(--size-400) var(--size-300);
+  background: linear-gradient(transparent, var(--main-bg) 30%);
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: var(--size-300);
+  width: 100%;
+  max-width: 720px;
+  min-height: 3.25rem;
+  margin-inline: auto;
+  padding: 0 var(--size-400);
+  border: 0;
+  border-radius: 12px;
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+  font: inherit;
+  cursor: pointer;
+}
+
+.summary-count {
+  display: grid;
+  place-items: center;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background-color: var(--accent-contrast);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.summary-total {
+  font-weight: 700;
+}
+
+.summary-action {
+  margin-inline-start: auto;
 }

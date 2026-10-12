@@ -2,8 +2,54 @@
   "hosting": [
     {
       "target": "foodgood",
-      "source": ".",
-      "frameworksBackend": {}
+      "public": "dist/foodgood/browser",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "rewrites": [
+        {
+          "source": "/menu-create",
+          "destination": "/index.csr.html"
+        }
+      ],
+      "headers": [
+        {
+          "regex": "^/([^.]*|.*\\.html)$",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(js|css)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(png|ico|svg|webmanifest|woff|woff2)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=86400"
+            }
+          ]
+        },
+        {
+          "regex": "^/(menu-create|404|index\\.csr)(\\.html)?$",
+          "headers": [
+            {
+              "key": "X-Robots-Tag",
+              "value": "noindex"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

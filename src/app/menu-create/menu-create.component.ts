@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IconComponent } from '../component/icon/icon.component';
-import { ulid } from 'ulid';
+
 import { MapValuePipe } from '../pipe/map-value.pipe';
-import { saveAs } from 'file-saver';
 
 interface Item {
   label: string;
@@ -27,11 +24,10 @@ interface Classify {
 
 @Component({
   selector: 'app-menu-create',
-  standalone: true,
   templateUrl: './menu-create.component.html',
   styleUrls: ['./menu-create.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, IconComponent, MapValuePipe],
+  imports: [MapValuePipe],
 })
 export class MenuCreateComponent {
   classifies: Classify[] = JSON.parse(
@@ -91,7 +87,7 @@ export class MenuCreateComponent {
   }
 
   addTag(classify: Classify, index: number) {
-    const tagId = ulid();
+    const tagId = crypto.randomUUID();
     this.classifies.splice(index, 1, {
       ...classify,
       tags: [...classify.tags, { label: '', id: tagId }],
@@ -149,8 +145,14 @@ export class MenuCreateComponent {
           2
         ),
       ],
-      'menu-create.json'
+      'menu-create.json',
+      { type: 'application/json' }
     );
-    saveAs(file);
+    const url = URL.createObjectURL(file);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = file.name;
+    anchor.click();
+    URL.revokeObjectURL(url);
   }
 }

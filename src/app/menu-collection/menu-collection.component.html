@@ -1,33 +1,27 @@
-<div class="flex items-center p-8 gap-4">
-  檢視模式：
-  <button
-    class="icon-button"
-    [class.selected]="mode === 'row'"
-    (click)="mode = 'row'"
-  >
-    <app-icon svgIcon="table-rows"></app-icon>
-  </button>
-  <button
-    class="icon-button"
-    [class.selected]="mode === 'col'"
-    (click)="mode = 'col'"
-  >
-    <app-icon svgIcon="view-column"></app-icon>
-  </button>
-</div>
-<div class="grid" [class.grid-flow-col]="mode === 'col'">
-  <div *ngFor="let classify of classifies" class="classify-container">
-    <div class="classify-header sticky top-0 p-8 z-10">
-      <h2 class="flex justify-between pr-16">
-        {{ classify.label }}
-      </h2>
-    </div>
-    <ol class="ol">
-      <li *ngFor="let item of classify.items" class="p-8">
-        <h3 class="flex">
-          {{ item }}
-        </h3>
+<div class="page page-wide">
+  <header class="page-header">
+    <h1 class="page-title">精選合菜</h1>
+    <p class="muted">適合家庭聚餐與宴客，建議提前來電預訂。</p>
+  </header>
+
+  <ul role="list" class="collections">
+    @for (classify of classifies; track classify.label) {
+      <li class="card">
+        <h2 class="collection-price price">${{ classify.label | number }}</h2>
+        <p class="muted">{{ classify.items.length }} 道菜</p>
+        <ol class="collection-items">
+          @for (item of classify.items; track $index) {
+            <li>{{ item }}</li>
+          }
+        </ol>
       </li>
-    </ol>
-  </div>
+    }
+  </ul>
+
+  <aside class="reserve">
+    <p>合菜內容與價格可能依季節調整，請以店家說明為準。</p>
+    <a class="cta cta-primary" [href]="store.phoneHref">
+      <app-icon svgIcon="phone"></app-icon>電話預訂 {{ store.phone }}
+    </a>
+  </aside>
 </div>

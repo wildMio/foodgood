@@ -1,12 +1,37 @@
-.classify-header {
-  background-color: var(--fg-primary-9);
-  color: var(--bg-primary-9);
+:host {
+  display: block;
 }
 
-.classify-container {
-  min-width: 10rem;
+.collections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: var(--size-400);
 }
 
-.ol {
-  padding-left: 1.75rem;
+.collection-price {
+  font-size: var(--fs-700);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.collection-items {
+  margin-top: var(--size-200);
+  padding-top: var(--size-300);
+  padding-inline-start: 1.5rem;
+  border-top: 1px solid var(--bg-primary-7);
+  line-height: 2;
+  list-style: decimal;
+
+  li::marker {
+    color: var(--fg-primary-5);
+  }
+}
+
+.reserve {
+  display: grid;
+  justify-items: center;
+  gap: var(--size-300);
+  margin-block: var(--size-600);
+  text-align: center;
+  color: var(--fg-primary-6);
 }

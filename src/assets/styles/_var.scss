@@ -21,7 +21,16 @@
   --bg-primary-6: hsl(0, 0%, 29%);
   --bg-primary-5: hsl(0, 0%, 36%);
 
-  --ff-primary: "Noto_Sans_TC", sans-serif;
+  --accent: hsl(18, 78%, 58%);
+  --accent-contrast: hsl(0, 0%, 0%);
+  --accent-soft: hsla(18, 78%, 58%, 0.14);
+  --success: hsl(142, 60%, 50%);
+
+  /* 內文使用裝置內建中文字型（免下載），僅標題載入 Noto Serif TC */
+  --ff-primary:
+    system-ui, -apple-system, "PingFang TC", "Noto Sans CJK TC", "Noto Sans TC",
+    "Microsoft JhengHei", sans-serif;
+  --ff-display: "Noto Serif TC", "PMingLiU", serif;
 
   --fw-thin: 100;
   --fw-regular: 400;
@@ -48,6 +57,11 @@
 
 .light-mode {
   --main-bg: hsl(0, 0%, 92%);
+
+  --accent: hsl(16, 72%, 32%);
+  --accent-contrast: hsl(0, 0%, 100%);
+  --accent-soft: hsla(16, 72%, 32%, 0.1);
+  --success: hsl(142, 70%, 30%);
 
   --bg-primary: hsl(0, 0%, 100%);
   --bg-primary-060: hsl(0, 0%, 100%, 0.6);

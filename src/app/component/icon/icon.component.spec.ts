@@ -8,7 +8,7 @@ describe('IconComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [IconComponent]
+      imports: [IconComponent],
     });
     fixture = TestBed.createComponent(IconComponent);
     component = fixture.componentInstance;

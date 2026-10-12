@@ -715,9 +715,9 @@ export const goose = {
       },
     },
   ],
-  storeName: '鵝香鵝肉店',
-  storeAddress: '327 桃園市桃園區桃園縣新屋鄉中山路555號',
-  storeContactNumber: '鵝香鵝肉店',
+  storeName: '鵝香鵝肉餐廳',
+  storeAddress: '327 桃園市新屋區中山路555號',
+  storeContactNumber: '03-497-0458',
 };
 
 export const gooseCollection = [
@@ -726,7 +726,7 @@ export const gooseCollection = [
     items: [
       '美味鵝肉',
       '客家湯圓',
-      '蒽油鵝腸',
+      '蔥油鵝腸',
       '薑絲大腸',
       '糖醋排骨',
       '白灼鮮蝦 ',

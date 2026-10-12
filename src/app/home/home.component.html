@@ -1,0 +1,170 @@
+<section class="hero grid place-items-center text-center">
+  <div class="hero-content grid gap-16 place-items-center">
+    <app-icon class="hero-logo" svgIcon="goose"></app-icon>
+    <p class="eyebrow">桃園・新屋</p>
+    <h1 class="hero-title">{{ store.name }}</h1>
+    <p class="hero-slogan">{{ store.slogan }}</p>
+    <div class="flex flex-wrap justify-center gap-8">
+      <a class="cta cta-primary" routerLink="/menu">
+        <app-icon svgIcon="restaurant"></app-icon>查看菜單
+      </a>
+      <a class="cta" [href]="store.phoneHref">
+        <app-icon svgIcon="phone"></app-icon>電話訂位
+      </a>
+    </div>
+    <div class="status-slot">
+      @if (status(); as status) {
+        <a
+          class="status flex items-center gap-8"
+          routerLink="/"
+          fragment="info"
+        >
+          <span class="status-dot" [class.is-open]="status.open"></span>
+          {{ status.label }}・{{ status.hint }}
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="about-title">
+  <p class="eyebrow">品牌故事</p>
+  <h2 id="about-title" class="section-title">一盤鵝肉，新屋的好味道</h2>
+  <div class="grid gap-16 prose">
+    @for (paragraph of store.intro; track $index) {
+      <p>{{ paragraph }}</p>
+    }
+  </div>
+</section>
+
+<section class="section" aria-labelledby="signature-title">
+  <p class="eyebrow">推薦菜色</p>
+  <div class="flex items-center justify-between gap-8">
+    <h2 id="signature-title" class="section-title">必點招牌</h2>
+    <a class="link" routerLink="/menu">完整菜單 →</a>
+  </div>
+  <ul role="list" class="dish-list">
+    <li class="dish dish-feature">
+      <div class="dish-head">
+        <h3>招牌鵝肉 <span class="badge">招牌</span></h3>
+        <span class="price">時價</span>
+      </div>
+      <p class="muted">每日現切白斬鵝肉，搭配店家特調醬料，來新屋必吃。</p>
+    </li>
+    @for (item of signatures; track item.label) {
+      <li class="dish">
+        <div class="dish-head">
+          <h3>{{ item.label }}</h3>
+          <span class="price">{{ item.priceText }}</span>
+        </div>
+        <p class="muted">{{ item.text }}</p>
+      </li>
+    }
+  </ul>
+</section>
+
+<section class="section" aria-labelledby="collection-title">
+  <p class="eyebrow">聚餐宴客</p>
+  <div class="flex items-center justify-between gap-8">
+    <h2 id="collection-title" class="section-title">精選合菜</h2>
+    <a class="link" routerLink="/menu-collection">查看內容 →</a>
+  </div>
+  <ul role="list" class="collections">
+    @for (collection of collections; track collection.price) {
+      <li>
+        <a class="card card-link" routerLink="/menu-collection">
+          <span class="price price-lg">${{ collection.price }}</span>
+          <span class="muted">{{ collection.count }} 道菜</span>
+        </a>
+      </li>
+    }
+  </ul>
+</section>
+
+<section id="info" class="section" aria-labelledby="info-title">
+  <p class="eyebrow">交通資訊</p>
+  <h2 id="info-title" class="section-title">店家資訊</h2>
+  <div class="info-layout grid gap-16">
+    <div class="grid gap-16 content-start">
+      <dl class="info-list grid gap-16">
+        <div class="info-row">
+          <dt>
+            <app-icon svgIcon="location"></app-icon>
+            <span class="visually-hidden">地址</span>
+          </dt>
+          <dd>
+            <a
+              class="link"
+              [href]="store.mapUrl"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ store.postalCode }} {{ store.address }}
+            </a>
+          </dd>
+        </div>
+        <div class="info-row">
+          <dt>
+            <app-icon svgIcon="phone"></app-icon>
+            <span class="visually-hidden">電話</span>
+          </dt>
+          <dd>
+            <a class="link" [href]="store.phoneHref">{{ store.phone }}</a>
+          </dd>
+        </div>
+        <div class="info-row">
+          <dt>
+            <app-icon svgIcon="schedule"></app-icon>
+            <span class="visually-hidden">營業時間</span>
+          </dt>
+          <dd class="grid gap-4">
+            @if (status(); as status) {
+              <span class="flex items-center gap-8">
+                <span class="status-dot" [class.is-open]="status.open"></span>
+                {{ status.label }}・{{ status.hint }}
+              </span>
+            }
+            <span>每日 {{ hoursText }}</span>
+            <small class="muted">{{ store.hoursNote }}</small>
+          </dd>
+        </div>
+        <div class="info-row">
+          <dt>
+            <app-icon svgIcon="parking"></app-icon>
+            <span class="visually-hidden">停車</span>
+          </dt>
+          <dd>{{ store.parking }}</dd>
+        </div>
+      </dl>
+      <div class="flex flex-wrap gap-8">
+        <a
+          class="cta cta-primary"
+          [href]="store.mapUrl"
+          target="_blank"
+          rel="noopener"
+        >
+          <app-icon svgIcon="directions"></app-icon>Google 地圖導航
+        </a>
+        <a class="cta" [href]="store.phoneHref">
+          <app-icon svgIcon="phone"></app-icon>撥打電話
+        </a>
+      </div>
+    </div>
+    @if (showMap()) {
+      <iframe
+        class="map"
+        title="{{ store.name }} Google 地圖"
+        [src]="mapEmbedUrl"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    } @else {
+      <div class="map" aria-hidden="true"></div>
+    }
+  </div>
+</section>
+
+<footer class="footer text-center muted">
+  <p>© {{ year }} {{ store.name }}</p>
+  <p>網站菜單與價格僅供參考，實際以店內公告為準。</p>
+</footer>
